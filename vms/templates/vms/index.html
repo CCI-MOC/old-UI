@@ -1,0 +1,39 @@
+{% extends 'market/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Virtual Machines" %}{% endblock %}
+
+{% block page_header %}
+  {% include "horizon/common/_page_header.html" with title=_("Choices") %}
+{% endblock page_header %}
+
+{% block market_main %}
+  {% if virtualMachines %}
+    {% for vm in virtualMachines %}
+                    <div class="item col-md-4">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">{{ vm.name }}</h3>
+                      </div>
+                      <div class="panel-body">
+                      <p>Type: Matlab
+                      <br />
+                      Compute: {{vm.compute}}
+                      <br />
+                      Storage: {{vm.storage}}
+                      </p>
+                      <p align="center">{#{% comment %}#}
+			{% if vm.state %}
+                        <a href="./?vm{{vm.name}}=0" ><i class="fa fa-pause fa-5x"></i><br />Pause Machine</a></a>
+			{% else %}
+                        <a href="./?vm{{vm.name}}=1" ><i class="fa fa-play fa-5x"></i><br />Run Machine</a>
+			{% endif %}{#{% endcomment %}#}
+    {% endfor %}
+  {% else %}
+     <div class="alert alert-warning alert-dismissable">
+       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Wait a minute!</strong> You don't have any clouds yet. Visit the <a href="/market/">marketplace</a> to deploy a cloud.
+                    </div>
+  {% endif %}
+{% endblock %}
+
+
