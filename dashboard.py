@@ -21,9 +21,9 @@ import horizon
 class Market(horizon.Dashboard):
     name = _("Market")
     slug = "market"
-    panels = ('browse',)
+    panels = ('browse', 'vms', )
     default_panel = 'browse'
-    permissions = ('openstack.roles.admin',)
+    permissions = ('openstack.roles.admin', )
 
 
 horizon.register(Market)
